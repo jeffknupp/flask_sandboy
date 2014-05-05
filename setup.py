@@ -1,6 +1,5 @@
 from __future__ import print_function
 from setuptools import setup, find_packages
-from setuptools.comboyd.test import test as TestComboyd
 import codecs
 import os
 import sys
@@ -23,21 +22,19 @@ def find_version(*file_paths):
 long_description = read('README.rst')
 
 setup(
-    name='sandboy',
-    version=find_version('sandboy', '__init__.py'),
-    url='http://github.com/jeffknupp/sandboy/',
+    name='flask_sandboy',
+    version=find_version('flask_sandboy', '__init__.py'),
+    url='http://github.com/jeffknupp/flask_sandboy/',
     license='BSD License',
     author='Jeff Knupp',
-    tests_require=['pytest'],
     install_requires=['Flask>=0.10.1',
                       ],
     author_email='jeff@jeffknupp.com',
     description='Automated REST APIs for SQLAlchemy models',
     long_description=long_description,
-    packages=['sandboy'],
+    packages=['flask_sandboy'],
     include_package_data=True,
     platforms='any',
-    test_suite='tests.test_sandboy',
     zip_safe=False,
     classifiers = [
         'Programming Language :: Python',
