@@ -7,6 +7,6 @@ install:
     - "pip install coverage"
     - "pip install coveralls"
 script: 
-    - "coverage run --source=flask_sandboy setup.py test"
+    - "py.test --cov flask_sandboy --cov-report term-missing"
 after_success:
     coveralls
