@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>flask_sandboy package &mdash; Flask-Sandboy 0.0.2.2 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Flask-Sandboy 0.0.2.2 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">Flask-Sandboy 0.0.2.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="flask-sandboy-package">
+<h1>flask_sandboy package<a class="headerlink" href="#flask-sandboy-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-flask_sandboy.exception">
+<span id="flask-sandboy-exception-module"></span><h2>flask_sandboy.exception module<a class="headerlink" href="#module-flask_sandboy.exception" title="Permalink to this headline">¶</a></h2>
+<p>JSON-based Exception classes that mimic today&#8217;s error messages sent by
+DMF.</p>
+<dl class="exception">
+<dt id="flask_sandboy.exception.BadRequestException">
+<em class="property">exception </em><tt class="descclassname">flask_sandboy.exception.</tt><tt class="descname">BadRequestException</tt><big>(</big><em>message=None</em>, <em>payload=None</em><big>)</big><a class="headerlink" href="#flask_sandboy.exception.BadRequestException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flask_sandboy.exception.EndpointException" title="flask_sandboy.exception.EndpointException"><tt class="xref py py-class docutils literal"><span class="pre">flask_sandboy.exception.EndpointException</span></tt></a></p>
+<p>Raised when a request contains illegal arguments, is missing arguments,
+can&#8217;t be decoded properly, or the request is trying to do something that
+doesn&#8217;t make sense.</p>
+<dl class="attribute">
+<dt id="flask_sandboy.exception.BadRequestException.code">
+<tt class="descname">code</tt><em class="property"> = 400</em><a class="headerlink" href="#flask_sandboy.exception.BadRequestException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="flask_sandboy.exception.ConflictException">
+<em class="property">exception </em><tt class="descclassname">flask_sandboy.exception.</tt><tt class="descname">ConflictException</tt><big>(</big><em>message=None</em>, <em>payload=None</em><big>)</big><a class="headerlink" href="#flask_sandboy.exception.ConflictException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flask_sandboy.exception.EndpointException" title="flask_sandboy.exception.EndpointException"><tt class="xref py py-class docutils literal"><span class="pre">flask_sandboy.exception.EndpointException</span></tt></a></p>
+<p>Similar to a ServerErrorException (HTTP 500) but there is some action the
+client may take to resolve the conflict, after which the request can be
+resubmitted. A request to reprocess a job not marked for reprocessing, for
+example, could cause this exception to be raised.</p>
+<dl class="attribute">
+<dt id="flask_sandboy.exception.ConflictException.code">
+<tt class="descname">code</tt><em class="property"> = 409</em><a class="headerlink" href="#flask_sandboy.exception.ConflictException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="flask_sandboy.exception.EndpointException">
+<em class="property">exception </em><tt class="descclassname">flask_sandboy.exception.</tt><tt class="descname">EndpointException</tt><big>(</big><em>message=None</em>, <em>payload=None</em><big>)</big><a class="headerlink" href="#flask_sandboy.exception.EndpointException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Base class for all Exceptions.</p>
+<dl class="method">
+<dt id="flask_sandboy.exception.EndpointException.to_dict">
+<tt class="descname">to_dict</tt><big>(</big><big>)</big><a class="headerlink" href="#flask_sandboy.exception.EndpointException.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a dictionary representation of the exception.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="flask_sandboy.exception.ForbiddenException">
+<em class="property">exception </em><tt class="descclassname">flask_sandboy.exception.</tt><tt class="descname">ForbiddenException</tt><big>(</big><em>message=None</em>, <em>payload=None</em><big>)</big><a class="headerlink" href="#flask_sandboy.exception.ForbiddenException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flask_sandboy.exception.EndpointException" title="flask_sandboy.exception.EndpointException"><tt class="xref py py-class docutils literal"><span class="pre">flask_sandboy.exception.EndpointException</span></tt></a></p>
+<p>Raised when a request asks us to do something that we won&#8217;t do because it
+violates the application logic. <em>Does not refer to an authentication failure.</em>
+Rather, it means the action requested is forbidden by the application.</p>
+<dl class="attribute">
+<dt id="flask_sandboy.exception.ForbiddenException.code">
+<tt class="descname">code</tt><em class="property"> = 403</em><a class="headerlink" href="#flask_sandboy.exception.ForbiddenException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="flask_sandboy.exception.NotAcceptableException">
+<em class="property">exception </em><tt class="descclassname">flask_sandboy.exception.</tt><tt class="descname">NotAcceptableException</tt><big>(</big><em>message=None</em>, <em>payload=None</em><big>)</big><a class="headerlink" href="#flask_sandboy.exception.NotAcceptableException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flask_sandboy.exception.EndpointException" title="flask_sandboy.exception.EndpointException"><tt class="xref py py-class docutils literal"><span class="pre">flask_sandboy.exception.EndpointException</span></tt></a></p>
+<p>Raised when the client does not Accept any of the Content-Types we are
+capable of generating.</p>
+<dl class="attribute">
+<dt id="flask_sandboy.exception.NotAcceptableException.code">
+<tt class="descname">code</tt><em class="property"> = 406</em><a class="headerlink" href="#flask_sandboy.exception.NotAcceptableException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="flask_sandboy.exception.NotFoundException">
+<em class="property">exception </em><tt class="descclassname">flask_sandboy.exception.</tt><tt class="descname">NotFoundException</tt><big>(</big><em>message=None</em>, <em>payload=None</em><big>)</big><a class="headerlink" href="#flask_sandboy.exception.NotFoundException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flask_sandboy.exception.EndpointException" title="flask_sandboy.exception.EndpointException"><tt class="xref py py-class docutils literal"><span class="pre">flask_sandboy.exception.EndpointException</span></tt></a></p>
+<p>Raised when the endpoint (or a resource it refers to) is not found. Can
+also be used if a resource referred to in a request (e.g. a specific job in
+a /job_status request) can not be found.</p>
+<dl class="attribute">
+<dt id="flask_sandboy.exception.NotFoundException.code">
+<tt class="descname">code</tt><em class="property"> = 404</em><a class="headerlink" href="#flask_sandboy.exception.NotFoundException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="flask_sandboy.exception.NotImplementedException">
+<em class="property">exception </em><tt class="descclassname">flask_sandboy.exception.</tt><tt class="descname">NotImplementedException</tt><big>(</big><em>message=None</em>, <em>payload=None</em><big>)</big><a class="headerlink" href="#flask_sandboy.exception.NotImplementedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flask_sandboy.exception.EndpointException" title="flask_sandboy.exception.EndpointException"><tt class="xref py py-class docutils literal"><span class="pre">flask_sandboy.exception.EndpointException</span></tt></a></p>
+<p>Raised when the application does not implement the functionality being
+requested. Note that this doesn&#8217;t refer to an HTTP method not being
+implemented for a given endpoint (which would be a 405 error).</p>
+<dl class="attribute">
+<dt id="flask_sandboy.exception.NotImplementedException.code">
+<tt class="descname">code</tt><em class="property"> = 501</em><a class="headerlink" href="#flask_sandboy.exception.NotImplementedException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="flask_sandboy.exception.ServerErrorException">
+<em class="property">exception </em><tt class="descclassname">flask_sandboy.exception.</tt><tt class="descname">ServerErrorException</tt><big>(</big><em>message=None</em>, <em>payload=None</em><big>)</big><a class="headerlink" href="#flask_sandboy.exception.ServerErrorException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flask_sandboy.exception.EndpointException" title="flask_sandboy.exception.EndpointException"><tt class="xref py py-class docutils literal"><span class="pre">flask_sandboy.exception.EndpointException</span></tt></a></p>
+<p>Raised when the application itself encounters an error not related to the
+request itself (for example, a database error).</p>
+<dl class="attribute">
+<dt id="flask_sandboy.exception.ServerErrorException.code">
+<tt class="descname">code</tt><em class="property"> = 500</em><a class="headerlink" href="#flask_sandboy.exception.ServerErrorException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="flask_sandboy.exception.ServiceUnavailableException">
+<em class="property">exception </em><tt class="descclassname">flask_sandboy.exception.</tt><tt class="descname">ServiceUnavailableException</tt><big>(</big><em>message=None</em>, <em>payload=None</em><big>)</big><a class="headerlink" href="#flask_sandboy.exception.ServiceUnavailableException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#flask_sandboy.exception.EndpointException" title="flask_sandboy.exception.EndpointException"><tt class="xref py py-class docutils literal"><span class="pre">flask_sandboy.exception.EndpointException</span></tt></a></p>
+<p>Raised when a resource is temporarily unavailable (e.g. not being able to
+get a database connection). Setting the <em>Retry-After</em> header gives the
+length of the delay, if it is known. Otherwise, this is treated as a 500
+error.</p>
+<dl class="attribute">
+<dt id="flask_sandboy.exception.ServiceUnavailableException.code">
+<tt class="descname">code</tt><em class="property"> = 503</em><a class="headerlink" href="#flask_sandboy.exception.ServiceUnavailableException.code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-flask_sandboy.models">
+<span id="flask-sandboy-models-module"></span><h2>flask_sandboy.models module<a class="headerlink" href="#module-flask_sandboy.models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="flask_sandboy.models.SerializableModel">
+<em class="property">class </em><tt class="descclassname">flask_sandboy.models.</tt><tt class="descname">SerializableModel</tt><a class="headerlink" href="#flask_sandboy.models.SerializableModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>A SQLAlchemy model mixin class that can serialize itself as JSON.</p>
+<dl class="method">
+<dt id="flask_sandboy.models.SerializableModel.from_dict">
+<tt class="descname">from_dict</tt><big>(</big><em>attributes</em><big>)</big><a class="headerlink" href="#flask_sandboy.models.SerializableModel.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the current instance based on attribute-&gt;value items in
+<em>attributes</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_sandboy.models.SerializableModel.to_dict">
+<tt class="descname">to_dict</tt><big>(</big><big>)</big><a class="headerlink" href="#flask_sandboy.models.SerializableModel.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dict representation of class by iterating over database
+columns.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="flask_sandboy.models.verify_fields">
+<tt class="descclassname">flask_sandboy.models.</tt><tt class="descname">verify_fields</tt><big>(</big><em>f</em><big>)</big><a class="headerlink" href="#flask_sandboy.models.verify_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>A decorator to automatically extract required and optional fields from json data, making them
+attributes of the class instance.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-flask_sandboy.service">
+<span id="flask-sandboy-service-module"></span><h2>flask_sandboy.service module<a class="headerlink" href="#module-flask_sandboy.service" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="flask_sandboy.service.Service">
+<em class="property">class </em><tt class="descclassname">flask_sandboy.service.</tt><tt class="descname">Service</tt><a class="headerlink" href="#flask_sandboy.service.Service" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask.views.MethodView</span></tt></p>
+<p>Base class for all resources.</p>
+<dl class="method">
+<dt id="flask_sandboy.service.Service.all_resources">
+<tt class="descname">all_resources</tt><big>(</big><big>)</big><a class="headerlink" href="#flask_sandboy.service.Service.all_resources" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all resources of this type as a JSON list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_sandboy.service.Service.delete">
+<tt class="descname">delete</tt><big>(</big><em>resource_id</em><big>)</big><a class="headerlink" href="#flask_sandboy.service.Service.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return response to HTTP DELETE request.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_sandboy.service.Service.get">
+<tt class="descname">get</tt><big>(</big><em>resource_id</em><big>)</big><a class="headerlink" href="#flask_sandboy.service.Service.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return response to HTTP GET request.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="flask_sandboy.service.Service.methods">
+<tt class="descname">methods</tt><em class="property"> = ['DELETE', 'GET', 'PATCH', 'POST', 'PUT']</em><a class="headerlink" href="#flask_sandboy.service.Service.methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="flask_sandboy.service.Service.patch">
+<tt class="descname">patch</tt><big>(</big><em>instance</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#flask_sandboy.service.Service.patch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return response to HTTP PATCH request.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_sandboy.service.Service.post">
+<tt class="descname">post</tt><big>(</big><em>instance</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#flask_sandboy.service.Service.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return response to HTTP POST request.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_sandboy.service.Service.put">
+<tt class="descname">put</tt><big>(</big><em>instance</em>, <em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#flask_sandboy.service.Service.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return response to HTTP PUT request.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="flask_sandboy.service.Service.resource">
+<tt class="descname">resource</tt><big>(</big><em>resource_id</em><big>)</big><a class="headerlink" href="#flask_sandboy.service.Service.resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return resource represented by this <em>resource_id</em>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-flask_sandboy">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-flask_sandboy" title="Permalink to this headline">¶</a></h2>
+<p>Flask application that creates a RESTful API from SQLAlchemy models.</p>
+<dl class="class">
+<dt id="flask_sandboy.Sandboy">
+<em class="property">class </em><tt class="descclassname">flask_sandboy.</tt><tt class="descname">Sandboy</tt><big>(</big><em>app</em>, <em>db</em>, <em>models</em><big>)</big><a class="headerlink" href="#flask_sandboy.Sandboy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<dl class="method">
+<dt id="flask_sandboy.Sandboy.init_app">
+<tt class="descname">init_app</tt><big>(</big><em>app</em>, <em>models</em><big>)</big><a class="headerlink" href="#flask_sandboy.Sandboy.init_app" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="flask_sandboy.Sandboy.register">
+<tt class="descname">register</tt><big>(</big><em>cls_list</em><big>)</big><a class="headerlink" href="#flask_sandboy.Sandboy.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register a class to be given a REST API.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">flask_sandboy package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-flask_sandboy.exception">flask_sandboy.exception module</a></li>
+<li><a class="reference internal" href="#module-flask_sandboy.models">flask_sandboy.models module</a></li>
+<li><a class="reference internal" href="#module-flask_sandboy.service">flask_sandboy.service module</a></li>
+<li><a class="reference internal" href="#module-flask_sandboy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/flask_sandboy.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">Flask-Sandboy 0.0.2.2 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Jeff Knupp.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
