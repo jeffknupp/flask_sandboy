@@ -1,3 +1,5 @@
+"""Various utilities for augmenting SQLAlchemy models."""
+
 import datetime
 from functools import wraps
 
@@ -26,10 +28,10 @@ class SerializableModel(object):
             setattr(self, attribute, attributes[attribute])
         return self
 
-def verify_fields(f):
+def verify_fields(function):
     """A decorator to automatically extract required and optional fields from json data, making them
     attributes of the class instance."""
-    @wraps(f)
+    @wraps(function)
     def decorated(instance, *args, **kwargs):
         """The decorator function."""
         data = request.get_json(force=True, silent=True)
@@ -40,6 +42,6 @@ def verify_fields(f):
                 continue
             if required.name not in data:
                 raise ForbiddenException('{} required'.format(required))
-        return f(instance, *args, **kwargs)
+        return function(instance, *args, **kwargs)
 
     return decorated

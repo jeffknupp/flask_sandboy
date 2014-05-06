@@ -1,3 +1,4 @@
+"""Base service for all RESTful endpoints."""
 from flask import request, jsonify, make_response
 from flask.views import MethodView
 
@@ -31,11 +32,12 @@ class Service(MethodView):
     @verify_fields
     def post(self, resource_id=None):
         """Return response to HTTP POST request."""
+        # pylint: disable=unused-argument
         resource = self.__model__.query.filter_by(**request.json).first()
         # resource already exists; don't create it again
         if resource:
             return self._no_content_response()
-        instance = self.__model__(**request.json)
+        instance = self.__model__(**request.json) #pylint: disable=not-callable
         self.__db__.session.add(instance)
         self.__db__.session.commit()
         return self._created_response(instance.to_dict())
@@ -52,7 +54,7 @@ class Service(MethodView):
         """Return response to HTTP PUT request."""
         instance = self.resource(resource_id)
         if instance is None:
-            instance = self.__model__(**request.json)
+            instance = self.__model__(**request.json) #pylint: disable=not-callable
         else:
             instance.from_dict(request.json)
         self.__db__.session.add(instance)
