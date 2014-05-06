@@ -153,3 +153,23 @@ def test_paginate(app, big_data):
         assert response.status_code == 200
         json_response = json.loads(response.get_data(as_text=True))['resources']
         assert json_response[0]['description'] == '20'
+
+def test_post_missing_field(app):
+    """If we leave off a field on a POST, do we get an error?"""
+    with app.test_client() as client:
+        response = client.post('/cloud', data=json.dumps({
+            'description': 'test description'
+            }))
+        assert response.status_code == 403
+        json_response = json.loads(response.get_data())
+        assert json_response == {'message': 'cloud.name required'}
+
+def test_post_no_data(app):
+    """If we send no JSON data on a POST, do we get an error?"""
+    with app.test_client() as client:
+        response = client.post('/cloud')
+        assert response.status_code == 400
+        json_response = json.loads(response.get_data())
+        assert json_response == {'message': 'No data received from request'}
+
+

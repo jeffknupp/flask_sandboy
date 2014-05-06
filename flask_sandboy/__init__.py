@@ -22,8 +22,6 @@ class Sandboy(object):
         """Initialize and register the given *models*."""
         self.app = app
         self.db = db
-        if not hasattr(app, 'extensions'):
-            app.extensions = {}
         app.extensions['sandboy'] = self
         self.blueprint = None
         self.init_app(app, models)
