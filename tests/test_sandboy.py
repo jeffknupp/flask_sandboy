@@ -75,7 +75,7 @@ def test_get_single_resource(app, data):
     with app.test_client() as client:
         response = client.get('/machine/1')
         assert response.status_code == 200
-        json_response = json.loads(response.get_data())
+        json_response = json.loads(response.get_data(as_text=True))
         assert json_response['id'] == 1
         assert json_response['hostname'] == 'zeus'
         assert json_response['description'] == 'application server'
@@ -90,7 +90,7 @@ def test_post_resource(app):
             'description': 'test description'
             }))
         assert response.status_code == 201
-        json_response = json.loads(response.get_data())
+        json_response = json.loads(response.get_data(as_text=True))
         assert json_response['id'] == 1
         assert json_response['name'] == 'temp'
         assert json_response['description'] == 'test description'
@@ -118,7 +118,7 @@ def test_put(app):
             'description': 'a private cloud'
             }))
         assert response.status_code == 201
-        json_response = json.loads(response.get_data())
+        json_response = json.loads(response.get_data(as_text=True))
         assert json_response['name'] == 'private_cloud'
         assert json_response['description'] == 'a private cloud'
 
@@ -130,7 +130,7 @@ def test_patch(app, data):
             'description': 'a private cloud',
             }))
         assert response.status_code == 201
-        json_response = json.loads(response.get_data())
+        json_response = json.loads(response.get_data(as_text=True))
         assert json_response['name'] == 'new cloud'
         assert json_response['description'] == 'a private cloud'
 
@@ -142,7 +142,7 @@ def test_put_existing_resource(app, data):
             'description': 'my public cloud'
             }))
         assert response.status_code == 201
-        json_response = json.loads(response.get_data())
+        json_response = json.loads(response.get_data(as_text=True))
         assert json_response['name'] == 'public_cloud'
         assert json_response['description'] == 'my public cloud'
 
@@ -151,5 +151,5 @@ def test_paginate(app, big_data):
     with app.test_client() as client:
         response = client.get('/machine?page=2')
         assert response.status_code == 200
-        json_response = json.loads(response.get_data())['resources']
+        json_response = json.loads(response.get_data(as_text=True))['resources']
         assert json_response[0]['description'] == '20'

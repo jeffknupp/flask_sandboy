@@ -22,8 +22,6 @@ class PyTest(Command):
             '--strict',
             '--verbose',
             '--tb=long',
-            '--cov=flask_sandboy',
-            '--cov-report=html',
             'tests'])
         raise SystemExit(errno)
 
