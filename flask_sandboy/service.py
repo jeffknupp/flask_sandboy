@@ -2,6 +2,7 @@ from flask import request, jsonify, make_response
 from flask.views import MethodView
 
 from flask_sandboy.models import verify_fields
+from flask_sandboy.exception import NotFoundException
 
 class Service(MethodView):
     """Base class for all resources."""
@@ -14,7 +15,10 @@ class Service(MethodView):
         if resource_id is None:
             return self.all_resources()
         else:
-            return jsonify(self.resource(resource_id).to_dict())
+            resource = self.resource(resource_id)
+            if not resource:
+                raise NotFoundException
+            return jsonify(resource.to_dict())
 
     def all_resources(self):
         """Return all resources of this type as a JSON list."""
@@ -66,7 +70,10 @@ class Service(MethodView):
 
     def resource(self, resource_id):
         """Return resource represented by this *resource_id*."""
-        return self.__db__.session.query(self.__model__).get(resource_id)
+        resource = self.__db__.session.query(self.__model__).get(resource_id)
+        if not resource:
+            return None
+        return resource
 
     @staticmethod
     def _no_content_response():
