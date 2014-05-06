@@ -1,6 +1,8 @@
 Flask-Sandboy
 =============
 
+|Build Status| |Coverage Status|
+
 Flask-Sandboy is `sandman's <http://www.github.com/jeffknupp/sandman>`__
 litte brother. Like ``sandman``, Flask-Sandboy automatically generates
 REST APIs. Unlike ``sandman``, it does so from existing Flask-SQLAlchemy
@@ -161,3 +163,7 @@ Release History
 
 -  Initial release
 
+.. |Build Status| image:: https://travis-ci.org/jeffknupp/flask_sandboy.svg?branch=develop
+   :target: https://travis-ci.org/jeffknupp/flask_sandboy
+.. |Coverage Status| image:: https://coveralls.io/repos/jeffknupp/flask_sandboy/badge.png
+   :target: https://coveralls.io/r/jeffknupp/flask_sandboy

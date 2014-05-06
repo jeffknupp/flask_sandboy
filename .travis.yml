@@ -7,6 +7,6 @@ install:
     - "pip install coverage"
     - "pip install coveralls"
 script: 
-    - "coverage run --source=sandman setup.py test"
+    - "coverage run --source=flask_sandboy setup.py test"
 after_success:
     coveralls
