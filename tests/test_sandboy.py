@@ -24,6 +24,21 @@ def app(request):
         db.drop_all()
         db.session.remove()
 
+@pytest.fixture
+def big_data(app):
+    with app.app_context():
+        cloud = Cloud(
+                name='private_cloud',
+                description='a private cloud')
+        db.session.add(cloud)
+        for index in range(100):
+            db.session.add(Machine(
+                hostname=str(index),
+                description=str(index),
+                cloud=cloud,
+                operating_system='Arch 64'))
+        db.session.commit() 
+
 
 @pytest.fixture
 def data(app):
@@ -60,7 +75,7 @@ def test_get_single_resource(app, data):
     with app.test_client() as client:
         response = client.get('/machine/1')
         assert response.status_code == 200
-        json_response = json.loads(response.get_data()) 
+        json_response = json.loads(response.get_data())
         assert json_response['id'] == 1
         assert json_response['hostname'] == 'zeus'
         assert json_response['description'] == 'application server'
@@ -75,7 +90,7 @@ def test_post_resource(app):
             'description': 'test description'
             }))
         assert response.status_code == 201
-        json_response = json.loads(response.get_data()) 
+        json_response = json.loads(response.get_data())
         assert json_response['id'] == 1
         assert json_response['name'] == 'temp'
         assert json_response['description'] == 'test description'
@@ -89,3 +104,52 @@ def test_post_existing_resource(app, data):
             }))
         assert response.status_code == 204
 
+def test_delete(app, data):
+    """Can we DELETE an existing resource?"""
+    with app.test_client() as client:
+        response = client.delete('/cloud/1')
+        assert response.status_code == 204
+
+def test_put(app):
+    """Do we ignore a POST for an existing resource?"""
+    with app.test_client() as client:
+        response = client.put('/cloud/1', data=json.dumps({
+            'name': 'private_cloud',
+            'description': 'a private cloud'
+            }))
+        assert response.status_code == 201
+        json_response = json.loads(response.get_data())
+        assert json_response['name'] == 'private_cloud'
+        assert json_response['description'] == 'a private cloud'
+
+def test_patch(app, data):
+    """Can we patch an existing resource?"""
+    with app.test_client() as client:
+        response = client.patch('/cloud/1', data=json.dumps({
+            'name': 'new cloud',
+            'description': 'a private cloud',
+            }))
+        assert response.status_code == 201
+        json_response = json.loads(response.get_data())
+        assert json_response['name'] == 'new cloud'
+        assert json_response['description'] == 'a private cloud'
+
+def test_put_existing_resource(app, data):
+    """Do we update an existing resource on a PUT?"""
+    with app.test_client() as client:
+        response = client.put('/cloud/1', data=json.dumps({
+            'name': 'public_cloud',
+            'description': 'my public cloud'
+            }))
+        assert response.status_code == 201
+        json_response = json.loads(response.get_data())
+        assert json_response['name'] == 'public_cloud'
+        assert json_response['description'] == 'my public cloud'
+
+def test_paginate(app, big_data):
+    """Can we properly paginate a get request?"""
+    with app.test_client() as client:
+        response = client.get('/machine?page=2')
+        assert response.status_code == 200
+        json_response = json.loads(response.get_data())['resources']
+        assert json_response[0]['description'] == '20'

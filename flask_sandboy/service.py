@@ -21,16 +21,14 @@ class Service(MethodView):
         if not 'page' in request.args:
             resources = self.__db__.session.query(self.__model__).all()
         else:
-            resources = self.__model__.query.paginate(int(request.args['page']))
+            resources = self.__model__.query.paginate(int(request.args['page'])).items
         return jsonify({'resources': [resource.to_dict() for resource in resources]})
 
     @verify_fields
     def post(self, resource_id=None):
         """Return response to HTTP POST request."""
-        print request.json
         resource = self.__model__.query.filter_by(**request.json).first()
         # resource already exists; don't create it again
-        print resource
         if resource:
             return self._no_content_response()
         instance = self.__model__(**request.json)
