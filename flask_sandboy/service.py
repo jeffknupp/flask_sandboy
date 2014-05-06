@@ -14,7 +14,7 @@ class Service(MethodView):
         if resource_id is None:
             return self.all_resources()
         else:
-            return jsonify(self.resource(resource_id).as_dict())
+            return jsonify(self.resource(resource_id).to_dict())
 
     def all_resources(self):
         """Return all resources of this type as a JSON list."""
@@ -27,8 +27,10 @@ class Service(MethodView):
     @verify_fields
     def post(self, resource_id=None):
         """Return response to HTTP POST request."""
+        print request.json
         resource = self.__model__.query.filter_by(**request.json).first()
         # resource already exists; don't create it again
+        print resource
         if resource:
             return self._no_content_response()
         instance = self.__model__(**request.json)

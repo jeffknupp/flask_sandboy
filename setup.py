@@ -1,9 +1,31 @@
 from __future__ import print_function
+from distutils.core import setup, Command
 from setuptools import setup, find_packages
 import codecs
 import os
 import sys
 import re
+
+class PyTest(Command):
+    user_options = []
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        import sys,subprocess
+        errno = subprocess.call([
+            sys.executable,
+            'runtests.py',
+            '--strict',
+            '--verbose',
+            '--tb=long',
+            '--cov=flask_sandboy',
+            '--cov-report=html',
+            'tests'])
+        raise SystemExit(errno)
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -27,8 +49,9 @@ setup(
     url='http://github.com/jeffknupp/flask_sandboy/',
     license='BSD License',
     author='Jeff Knupp',
-    install_requires=['Flask>=0.10.1',
-                      ],
+    install_requires=['Flask>=0.10.1', ],
+    tests_require=['pytest'],
+    cmdclass = {'test': PyTest},
     author_email='jeff@jeffknupp.com',
     description='Automated REST APIs for SQLAlchemy models',
     long_description=long_description,
@@ -50,4 +73,7 @@ setup(
         'Topic :: Software Development :: Libraries :: Application Frameworks',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         ],
+    extras_require={
+        'testing': ['pytest'],
+      }
 )
