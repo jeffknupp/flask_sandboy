@@ -1,7 +1,7 @@
 Flask-Sandboy
 =============
 
-|Build Status| |Coverage Status|
+|Build Status| |Coverage Status| |Downloads| |Latest Version|
 
 Flask-Sandboy is `sandman's <http://www.github.com/jeffknupp/sandman>`__
 litte brother. Like ``sandman``, Flask-Sandboy automatically generates
@@ -167,3 +167,7 @@ Release History
    :target: https://travis-ci.org/jeffknupp/flask_sandboy
 .. |Coverage Status| image:: https://coveralls.io/repos/jeffknupp/flask_sandboy/badge.png
    :target: https://coveralls.io/r/jeffknupp/flask_sandboy
+.. |Downloads| image:: https://pypip.in/download/flask_sandboy/badge.png
+   :target: https://pypi.python.org/pypi/flask_sandboy/
+.. |Latest Version| image:: https://pypip.in/version/flask_sandboy/badge.png
+   :target: https://pypi.python.org/pypi/flask_sandboy/
