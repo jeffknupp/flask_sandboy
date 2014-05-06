@@ -14,14 +14,14 @@ class Service(MethodView):
     def get(self, resource_id):
         """Return response to HTTP GET request."""
         if resource_id is None:
-            return self.all_resources()
+            return self._all_resources()
         else:
             resource = self.resource(resource_id)
             if not resource:
                 raise NotFoundException
             return jsonify(resource.to_dict())
 
-    def all_resources(self):
+    def _all_resources(self):
         """Return all resources of this type as a JSON list."""
         if not 'page' in request.args:
             resources = self.__db__.session.query(self.__model__).all()
@@ -44,7 +44,7 @@ class Service(MethodView):
 
     def delete(self, resource_id):
         """Return response to HTTP DELETE request."""
-        instance = self.resource(resource_id)
+        instance = self._resource(resource_id)
         self.__db__.session.delete(instance)
         self.__db__.session.commit()
         return self._no_content_response()
@@ -52,7 +52,7 @@ class Service(MethodView):
     @verify_fields
     def put(self, resource_id):
         """Return response to HTTP PUT request."""
-        instance = self.resource(resource_id)
+        instance = self._resource(resource_id)
         if instance is None:
             instance = self.__model__(**request.json) #pylint: disable=not-callable
         else:
@@ -64,13 +64,13 @@ class Service(MethodView):
     @verify_fields
     def patch(self, resource_id):
         """Return response to HTTP PATCH request."""
-        resource = self.resource(resource_id)
+        resource = self._resource(resource_id)
         resource.from_dict(request.json)
         self.__db__.session.add(resource)
         self.__db__.session.commit()
         return self._created_response(resource.to_dict())
 
-    def resource(self, resource_id):
+    def _resource(self, resource_id):
         """Return resource represented by this *resource_id*."""
         resource = self.__db__.session.query(self.__model__).get(resource_id)
         if not resource:

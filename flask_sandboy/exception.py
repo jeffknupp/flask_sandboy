@@ -1,5 +1,4 @@
-"""JSON-based Exception classes that mimic today's error messages sent by
-DMF."""
+"""JSON-based Exception classes."""
 
 class EndpointException(Exception):
     """Base class for all Exceptions."""
