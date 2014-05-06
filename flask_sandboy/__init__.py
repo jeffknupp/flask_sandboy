@@ -14,7 +14,7 @@ from flask_sandboy.exception import (BadRequestException,
         ServiceUnavailableException,
         )
 
-__version__ = '0.0.1'
+__version__ = '0.0.2.5'
 
 class Sandboy(object):
     def __init__(self, app, db, models):
