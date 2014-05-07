@@ -153,6 +153,13 @@ I'll leave it up to the Issues tab to track this.
 Release History
 ---------------
 
+0.0.3
+~~~~~
+
+-  various bug fixes
+-  100% test coverage
+-  documentation
+
 0.0.2
 ~~~~~
 
