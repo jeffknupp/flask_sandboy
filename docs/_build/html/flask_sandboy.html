@@ -23,7 +23,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Flask-Sandboy 0.0.2.2 documentation" href="index.html" /> 
+    <link rel="top" title="Flask-Sandboy 0.0.2.2 documentation" href="index.html" />
+    <link rel="prev" title="Welcome to Flask-Sandboy’s documentation!" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,6 +36,9 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Flask-Sandboy’s documentation!"
+             accesskey="P">previous</a> |</li>
         <li><a href="index.html">Flask-Sandboy 0.0.2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -51,8 +55,7 @@
 </div>
 <div class="section" id="module-flask_sandboy.exception">
 <span id="flask-sandboy-exception-module"></span><h2>flask_sandboy.exception module<a class="headerlink" href="#module-flask_sandboy.exception" title="Permalink to this headline">¶</a></h2>
-<p>JSON-based Exception classes that mimic today&#8217;s error messages sent by
-DMF.</p>
+<p>JSON-based Exception classes.</p>
 <dl class="exception">
 <dt id="flask_sandboy.exception.BadRequestException">
 <em class="property">exception </em><tt class="descclassname">flask_sandboy.exception.</tt><tt class="descname">BadRequestException</tt><big>(</big><em>message=None</em>, <em>payload=None</em><big>)</big><a class="headerlink" href="#flask_sandboy.exception.BadRequestException" title="Permalink to this definition">¶</a></dt>
@@ -181,6 +184,7 @@ error.</p>
 </div>
 <div class="section" id="module-flask_sandboy.models">
 <span id="flask-sandboy-models-module"></span><h2>flask_sandboy.models module<a class="headerlink" href="#module-flask_sandboy.models" title="Permalink to this headline">¶</a></h2>
+<p>Various utilities for augmenting SQLAlchemy models.</p>
 <dl class="class">
 <dt id="flask_sandboy.models.SerializableModel">
 <em class="property">class </em><tt class="descclassname">flask_sandboy.models.</tt><tt class="descname">SerializableModel</tt><a class="headerlink" href="#flask_sandboy.models.SerializableModel" title="Permalink to this definition">¶</a></dt>
@@ -204,7 +208,7 @@ columns.</p>
 
 <dl class="function">
 <dt id="flask_sandboy.models.verify_fields">
-<tt class="descclassname">flask_sandboy.models.</tt><tt class="descname">verify_fields</tt><big>(</big><em>f</em><big>)</big><a class="headerlink" href="#flask_sandboy.models.verify_fields" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">flask_sandboy.models.</tt><tt class="descname">verify_fields</tt><big>(</big><em>function</em><big>)</big><a class="headerlink" href="#flask_sandboy.models.verify_fields" title="Permalink to this definition">¶</a></dt>
 <dd><p>A decorator to automatically extract required and optional fields from json data, making them
 attributes of the class instance.</p>
 </dd></dl>
@@ -212,17 +216,12 @@ attributes of the class instance.</p>
 </div>
 <div class="section" id="module-flask_sandboy.service">
 <span id="flask-sandboy-service-module"></span><h2>flask_sandboy.service module<a class="headerlink" href="#module-flask_sandboy.service" title="Permalink to this headline">¶</a></h2>
+<p>Base service for all RESTful endpoints.</p>
 <dl class="class">
 <dt id="flask_sandboy.service.Service">
 <em class="property">class </em><tt class="descclassname">flask_sandboy.service.</tt><tt class="descname">Service</tt><a class="headerlink" href="#flask_sandboy.service.Service" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">flask.views.MethodView</span></tt></p>
 <p>Base class for all resources.</p>
-<dl class="method">
-<dt id="flask_sandboy.service.Service.all_resources">
-<tt class="descname">all_resources</tt><big>(</big><big>)</big><a class="headerlink" href="#flask_sandboy.service.Service.all_resources" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return all resources of this type as a JSON list.</p>
-</dd></dl>
-
 <dl class="method">
 <dt id="flask_sandboy.service.Service.delete">
 <tt class="descname">delete</tt><big>(</big><em>resource_id</em><big>)</big><a class="headerlink" href="#flask_sandboy.service.Service.delete" title="Permalink to this definition">¶</a></dt>
@@ -258,12 +257,6 @@ attributes of the class instance.</p>
 <dd><p>Return response to HTTP PUT request.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="flask_sandboy.service.Service.resource">
-<tt class="descname">resource</tt><big>(</big><em>resource_id</em><big>)</big><a class="headerlink" href="#flask_sandboy.service.Service.resource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return resource represented by this <em>resource_id</em>.</p>
-</dd></dl>
-
 </dd></dl>
 
 </div>
@@ -274,10 +267,12 @@ attributes of the class instance.</p>
 <dt id="flask_sandboy.Sandboy">
 <em class="property">class </em><tt class="descclassname">flask_sandboy.</tt><tt class="descname">Sandboy</tt><big>(</big><em>app</em>, <em>db</em>, <em>models</em><big>)</big><a class="headerlink" href="#flask_sandboy.Sandboy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Main object for injecting RESTful HTTP endpoint.</p>
 <dl class="method">
 <dt id="flask_sandboy.Sandboy.init_app">
 <tt class="descname">init_app</tt><big>(</big><em>app</em>, <em>models</em><big>)</big><a class="headerlink" href="#flask_sandboy.Sandboy.init_app" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Initialize and register error handlers.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="flask_sandboy.Sandboy.register">
@@ -308,6 +303,9 @@ attributes of the class instance.</p>
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to Flask-Sandboy&#8217;s documentation!</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/flask_sandboy.txt"
@@ -339,6 +337,9 @@ attributes of the class instance.</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Flask-Sandboy’s documentation!"
+             >previous</a> |</li>
         <li><a href="index.html">Flask-Sandboy 0.0.2.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
