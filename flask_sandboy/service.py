@@ -16,7 +16,7 @@ class Service(MethodView):
         if resource_id is None:
             return self._all_resources()
         else:
-            resource = self.resource(resource_id)
+            resource = self._resource(resource_id)
             if not resource:
                 raise NotFoundException
             return jsonify(resource.to_dict())

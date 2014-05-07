@@ -172,4 +172,8 @@ def test_post_no_data(app):
         json_response = json.loads(response.get_data())
         assert json_response == {'message': 'No data received from request'}
 
-
+def test_get_missing_resource(app):
+    """If we GET a resource with an ID that doesn't exist, do we get a 404?"""
+    with app.test_client() as client:
+        response = client.get('/machine/31337')
+        assert response.status_code == 404
