@@ -14,7 +14,7 @@ from flask_sandboy.exception import (
     NotImplementedException,
     ServiceUnavailableException)
 
-__version__ = '0.0.2.6'
+__version__ = '0.0.3'
 
 class Sandboy(object):
     """Main object for injecting RESTful HTTP endpoint."""
