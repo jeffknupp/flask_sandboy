@@ -111,7 +111,7 @@ def test_delete(app, data):
         assert response.status_code == 204
 
 def test_put(app):
-    """Do we ignore a POST for an existing resource?"""
+    """Can we PUT a resource with a specified key?"""
     with app.test_client() as client:
         response = client.put('/cloud/1', data=json.dumps({
             'name': 'private_cloud',
@@ -123,7 +123,7 @@ def test_put(app):
         assert json_response['description'] == 'a private cloud'
 
 def test_patch(app, data):
-    """Can we patch an existing resource?"""
+    """Can we PATCH an existing resource?"""
     with app.test_client() as client:
         response = client.patch('/cloud/1', data=json.dumps({
             'name': 'new cloud',
