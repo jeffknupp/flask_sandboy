@@ -1,5 +1,6 @@
 """JSON-based Exception classes."""
 
+
 class EndpointException(Exception):
     """Base class for all Exceptions."""
 
@@ -24,9 +25,10 @@ class BadRequestException(EndpointException):
 
 
 class ForbiddenException(EndpointException):
-    """Raised when a request asks us to do something that we won't do because it
-    violates the application logic. *Does not refer to an authentication failure.*
-    Rather, it means the action requested is forbidden by the application."""
+    """Raised when a request asks us to do something that we won't do
+    because it violates the application logic. *Does not refer to
+    an authentication failure.* Rather, it means the action requested
+    is forbidden by the application."""
 
     code = 403
 
@@ -47,17 +49,17 @@ class NotAcceptableException(EndpointException):
 
 
 class ConflictException(EndpointException):
-    """Similar to a ServerErrorException (HTTP 500) but there is some action the
-    client may take to resolve the conflict, after which the request can be
-    resubmitted. A request to reprocess a job not marked for reprocessing, for
-    example, could cause this exception to be raised."""
+    """Similar to a ServerErrorException (HTTP 500) but there is some action
+    the client may take to resolve the conflict, after which the request
+    can be resubmitted. A request to reprocess a job not marked for
+    reprocessing, for example, could cause this exception to be raised."""
 
     code = 409
 
 
 class ServerErrorException(EndpointException):
-    """Raised when the application itself encounters an error not related to the
-    request itself (for example, a database error)."""
+    """Raised when the application itself encounters an error not related
+    to the request itself (for example, a database error)."""
 
     code = 500
 
@@ -71,8 +73,8 @@ class NotImplementedException(EndpointException):
 
 
 class ServiceUnavailableException(EndpointException):
-    """Raised when a resource is temporarily unavailable (e.g. not being able to
-    get a database connection). Setting the *Retry-After* header gives the
+    """Raised when a resource is temporarily unavailable (e.g. not being able
+    to get a database connection). Setting the *Retry-After* header gives the
     length of the delay, if it is known. Otherwise, this is treated as a 500
     error."""
 

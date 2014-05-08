@@ -7,6 +7,7 @@ from flask import request
 
 from flask_sandboy.exception import ForbiddenException, BadRequestException
 
+
 class SerializableModel(object):
     """A SQLAlchemy model mixin class that can serialize itself as JSON."""
 
@@ -28,9 +29,10 @@ class SerializableModel(object):
             setattr(self, attribute, attributes[attribute])
         return self
 
+
 def verify_fields(function):
-    """A decorator to automatically extract required and optional fields from json data, making them
-    attributes of the class instance."""
+    """A decorator to automatically verify all required JSON fields
+    have been sent."""
     @wraps(function)
     def decorated(instance, *args, **kwargs):
         """The decorator function."""
@@ -38,7 +40,8 @@ def verify_fields(function):
         if not data:
             raise BadRequestException("No data received from request")
         for required in instance.__model__.__table__.columns:
-            if required.name in instance.__model__.__table__.primary_key.columns:
+            if required.name in (
+                    instance.__model__.__table__.primary_key.columns):
                 continue
             if required.name not in data:
                 raise ForbiddenException('{} required'.format(required))

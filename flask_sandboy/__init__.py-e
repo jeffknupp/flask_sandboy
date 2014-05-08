@@ -16,7 +16,6 @@ from flask_sandboy.exception import (
 
 __version__ = '0.0.3'
 
-
 class Sandboy(object):
     """Main object for injecting RESTful HTTP endpoint."""
     def __init__(self, app, db, models):
@@ -29,10 +28,8 @@ class Sandboy(object):
 
     def init_app(self, app, models):
         """Initialize and register error handlers."""
-
         # pylint: disable=unused-variable
         self.blueprint = Blueprint('sandboy', __name__)
-
         @self.blueprint.errorhandler(BadRequestException)
         @self.blueprint.errorhandler(ForbiddenException)
         @self.blueprint.errorhandler(NotAcceptableException)
@@ -42,8 +39,7 @@ class Sandboy(object):
         @self.blueprint.errorhandler(NotImplementedException)
         @self.blueprint.errorhandler(ServiceUnavailableException)
         def handle_application_error(error):
-            """Handler used to send JSON error messages rather than default
-            HTML ones."""
+            """Handler used to send JSON error messages rather than default HTML ones."""
             response = jsonify(error.to_dict())
             response.status_code = error.code
             return response
@@ -63,8 +59,7 @@ class Sandboy(object):
                 (Service,),
                 {'__model__': serializable_model,
                  '__db__': self.db})
-            view_func = new_endpoint.as_view(
-                new_endpoint.__model__.__tablename__)
+            view_func = new_endpoint.as_view(new_endpoint.__model__.__tablename__)
             self.blueprint.add_url_rule(
                 '/' + new_endpoint.__model__.__tablename__,
                 defaults={'resource_id': None},

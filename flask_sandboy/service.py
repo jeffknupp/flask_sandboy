@@ -5,6 +5,7 @@ from flask.views import MethodView
 from flask_sandboy.models import verify_fields
 from flask_sandboy.exception import NotFoundException
 
+
 class Service(MethodView):
     """Base class for all resources."""
 
@@ -26,8 +27,10 @@ class Service(MethodView):
         if not 'page' in request.args:
             resources = self.__db__.session.query(self.__model__).all()
         else:
-            resources = self.__model__.query.paginate(int(request.args['page'])).items
-        return jsonify({'resources': [resource.to_dict() for resource in resources]})
+            resources = self.__model__.query.paginate(
+                int(request.args['page'])).items
+        return jsonify(
+            {'resources': [resource.to_dict() for resource in resources]})
 
     @verify_fields
     def post(self, resource_id=None):
@@ -37,7 +40,8 @@ class Service(MethodView):
         # resource already exists; don't create it again
         if resource:
             return self._no_content_response()
-        instance = self.__model__(**request.json) #pylint: disable=not-callable
+        instance = self.__model__(  # pylint: disable=not-callable
+            **request.json)
         self.__db__.session.add(instance)
         self.__db__.session.commit()
         return self._created_response(instance.to_dict())
@@ -54,7 +58,8 @@ class Service(MethodView):
         """Return response to HTTP PUT request."""
         instance = self._resource(resource_id)
         if instance is None:
-            instance = self.__model__(**request.json) #pylint: disable=not-callable
+            instance = self.__model__(   # pylint: disable=not-callable
+                **request.json)
         else:
             instance.from_dict(request.json)
         self.__db__.session.add(instance)
