@@ -19,19 +19,20 @@ __version__ = '0.0.3'
 
 class Sandboy(object):
     """Main object for injecting RESTful HTTP endpoint."""
-    def __init__(self, app, db, models):
+    def __init__(self, app, db, models, url_prefix=None):
         """Initialize and register the given *models*."""
         self.app = app
         self.db = db
         app.extensions['sandboy'] = self
         self.blueprint = None
+        self.url_prefix = url_prefix
         self.init_app(app, models)
 
     def init_app(self, app, models):
         """Initialize and register error handlers."""
 
         # pylint: disable=unused-variable
-        self.blueprint = Blueprint('sandboy', __name__)
+        self.blueprint = Blueprint('sandboy', __name__, url_prefix=self.url_prefix)
 
         @self.blueprint.errorhandler(BadRequestException)
         @self.blueprint.errorhandler(ForbiddenException)
