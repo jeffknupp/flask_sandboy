@@ -6,7 +6,7 @@ from flask_sandboy.models import verify_fields
 from flask_sandboy.exception import NotFoundException
 
 
-class Service(MethodView):
+class ReadService(MethodView):
     """Base class for all resources."""
 
     __model__ = None
@@ -31,6 +31,16 @@ class Service(MethodView):
                 int(request.args['page'])).items
         return jsonify(
             {'resources': [resource.to_dict() for resource in resources]})
+
+    def _resource(self, resource_id):
+        """Return resource represented by this *resource_id*."""
+        resource = self.__db__.session.query(self.__model__).get(resource_id)
+        if not resource:
+            return None
+        return resource
+
+
+class WriteService(ReadService):
 
     @verify_fields
     def post(self, resource_id=None):
@@ -75,12 +85,6 @@ class Service(MethodView):
         self.__db__.session.commit()
         return self._created_response(resource.to_dict())
 
-    def _resource(self, resource_id):
-        """Return resource represented by this *resource_id*."""
-        resource = self.__db__.session.query(self.__model__).get(resource_id)
-        if not resource:
-            return None
-        return resource
 
     @staticmethod
     def _no_content_response():
