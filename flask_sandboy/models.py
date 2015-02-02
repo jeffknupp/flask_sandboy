@@ -41,7 +41,7 @@ def verify_fields(function):
             raise BadRequestException("No data received from request")
         for required in instance.__model__.__table__.columns:
             if required.name in (
-                    instance.__model__.__table__.primary_key.columns):
+                    instance.__model__.__table__.primary_key.columns) or required.default or required.nullable is True:
                 continue
             if required.name not in data:
                 raise ForbiddenException('{} required'.format(required))
