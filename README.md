@@ -2,8 +2,8 @@
 
 [![Build Status](https://travis-ci.org/jeffknupp/flask_sandboy.svg?branch=develop)](https://travis-ci.org/jeffknupp/flask_sandboy)
 [![Coverage Status](https://coveralls.io/repos/jeffknupp/flask_sandboy/badge.png)](https://coveralls.io/r/jeffknupp/flask_sandboy)
-[![Downloads](https://pypip.in/download/flask_sandboy/badge.png)](https://pypi.python.org/pypi/flask_sandboy/)
-[![Latest Version](https://pypip.in/version/flask_sandboy/badge.png)](https://pypi.python.org/pypi/flask_sandboy/)
+[![Downloads](https://img.shields.io/pypi/dm/flask_sandboy.svg)](https://pypi.python.org/pypi/flask_sandboy/)
+[![Latest Version](https://img.shields.io/pypi/v/flask_sandboy.svg)](https://pypi.python.org/pypi/flask_sandboy/)
 
 Flask-Sandboy is [sandman's](http://www.github.com/jeffknupp/sandman) litte
 brother. Like `sandman`, Flask-Sandboy automatically generates REST APIs. Unlike
